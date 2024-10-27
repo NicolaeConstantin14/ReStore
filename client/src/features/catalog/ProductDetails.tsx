@@ -8,15 +8,16 @@ import LoadingComponents from "../../app/layout/LoadingComponents";
 
 export default function ProductDetails() {
     const {id} = useParams<{id: string}>();
-    const[product, SetProduct] = useState<Product | null>(null);
+    const[product, setProduct] = useState<Product | null>(null);
     const[loading, setLoading] = useState(true);
 
     useEffect(() => {
-       id && agent.Catalog.details(parseInt(id))
-        .then(response => SetProduct(response))
-        .catch(error => console.log(error))
-        .finally(() => setLoading(false));
-    }, [id])
+        if (!id) return; // Early return if id is false
+        agent.Catalog.details(parseInt(id))
+            .then(response => setProduct(response))
+            .catch(error => console.log(error))
+            .finally(() => setLoading(false));
+    }, [id]);
 
     if (loading) return <LoadingComponents message='Loading product...'/>
 
