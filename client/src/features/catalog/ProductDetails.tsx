@@ -12,7 +12,7 @@ export default function ProductDetails() {
     const[loading, setLoading] = useState(true);
 
     useEffect(() => {
-       agent.Catalog.details(parseInt(id))
+       id && agent.Catalog.details(parseInt(id))
         .then(response => SetProduct(response))
         .catch(error => console.log(error))
         .finally(() => setLoading(false));
