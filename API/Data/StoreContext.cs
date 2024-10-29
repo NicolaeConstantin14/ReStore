@@ -11,6 +11,8 @@ namespace API.Data
         }
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Basket> Baskets { get; set; }
+
         public static implicit operator ControllerContext(StoreContext v)
         {
             throw new NotImplementedException();
